@@ -40,7 +40,38 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'image' => 'required|string|max:255',
+            'barcode' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
+            'quantity' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+        ]);
+        //deklarasi image path
+        $image_path = '';
+        //cek apakah ada file gambar yang diupload
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('product', 'public');
+        }
+        //insert data
+        $product = Product::create([
+            'name'=>$request->input('name'),
+            'description'=>$request->input('description'),
+            'image'=>$image_path,
+            'barcode'=>$request->input('barcode'),
+            'price'=>$request->input('price'),
+            'quantity'=>$request->input('quantity'),
+            'status'=>$request->input('status'),
+        ]);
+        //redirect
+        if (!$product) {
+            return redirect()->back()->with(['Error' => 'error page create']);
+        } else {
+            return redirect()->route('product.index')->with(['error' => '<strong>' . $product->name . '</strong> Tidak Ditambahkan']);
+        }
     }
 
     /**
