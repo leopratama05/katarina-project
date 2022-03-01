@@ -25,3 +25,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test', function () {
     return view('layouts.master');
 });
+
+Route::resource('product', \App\Http\Controllers\ProductController::class);
