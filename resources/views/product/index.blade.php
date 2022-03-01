@@ -29,7 +29,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="#" class="btn btn-primary card-title">Create Product</a>
+                            <a href="{{ route('product.create') }}" class="btn btn-primary card-title">Create Product</a>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered">
@@ -52,15 +52,15 @@
                                             <td>{{ $pr->name }}</td>
                                             <td>{{ $pr->description }}</td>
                                             <td>{{ $pr->image }}</td>
-                                            <td>{{$pr->barcode}}</td>
-                                            <td>{{$pr->price}}</td>
-                                            <td>{{$pr->quantity}}</td>
+                                            <td>{{ $pr->barcode }}</td>
+                                            <td>{{ $pr->price }}</td>
+                                            <td>{{ $pr->quantity }}</td>
                                             <td></td>
                                         </tr>
                                     @empty
-                                    <tr>
-                                        <td colspan="8" class="text-center">Belum Ada Data</td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="8" class="text-center">Belum Ada Data</td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
