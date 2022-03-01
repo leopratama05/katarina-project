@@ -35,6 +35,7 @@
                             {{-- ngodingnya disini --}}
                             <form action="" method="post">
                                 @csrf
+                                @method('POST')
                                 <div class="form-group">
                                     <label for="">Product Name</label>
                                     <input type="text" name="name" class="form-control" placeholder="Product Name">
@@ -52,11 +53,15 @@
                                     <label for="">Product Image</label>
                                     <input type="file" name="image" class="form-control">
                                 </div>
-
-
+                                <div class="form-group">
+                                    <label for="">Qty</label>
+                                    <input type="number" name="quantity" class="form-control">
+                                </div>
                                 <div class="form-group">
                                     <label for="">Product Status</label>
                                     <select name="status" id="" class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
                                 </div>
                             </form>
                         </div>
