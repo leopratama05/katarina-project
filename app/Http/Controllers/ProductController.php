@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -44,7 +45,7 @@ class ProductController extends Controller
         $this->validate($request,[
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
+            'image' => 'nullable|image',
             'barcode' => 'required|string|max:255',
             'price' => 'required|string|max:255',
             'quantity' => 'required|string|max:255',
