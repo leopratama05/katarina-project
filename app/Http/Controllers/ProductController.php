@@ -68,7 +68,7 @@ class ProductController extends Controller
         ]);
         //redirect
         if (!$product) {
-            return redirect()->back()->with(['Error' => 'error page create']);
+            return redirect()->back()->with(['error' => 'error page create']);
         } else {
             return redirect()->route('product.index')->with(['error' => '<strong>' . $product->name . '</strong> Tidak Ditambahkan']);
         }
