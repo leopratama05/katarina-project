@@ -30,9 +30,9 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form action="#" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-
+                                @method('POST')
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
