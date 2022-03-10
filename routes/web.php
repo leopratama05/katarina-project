@@ -27,3 +27,4 @@ Route::get('/test', function () {
 });
 
 Route::resource('product', \App\Http\Controllers\ProductController::class);
+Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');

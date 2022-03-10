@@ -94,7 +94,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('product.edit')->with('product', $product);
     }
 
     /**
@@ -104,9 +104,41 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
         //
+        //validasi
+        $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'image' => 'nullable|image',
+            'barcode' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
+            'quantity' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+        ]);
+        //deklarasi from
+        $product = Product::find($id);
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->barcode = $request->input('barcode');
+        $product->price = $request->input('price');
+        $product->quantity = $request->input('quantity');
+        $product->status = $request->input('status');
+        //cek apakah ada file gambar yang diupload
+        if($request->hasFile('image')){
+            //delete old image
+            Storage::delete($product->image);
+        }
+        //store image
+        $image_path = $request->file('image')->store('product', 'public');
+        //save to database imagenya
+        $product->image = $image_path;
+        //save
+        if(!$product->save()){
+            return redirect()->back()->with(['error' => 'error page update']);
+        }
+        return redirect()->route('product.index')->with('success', 'update data');
     }
 
     /**
@@ -115,8 +147,17 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         //
+        $product = Product::find($id);
+        //delete image
+        if($product->image){
+            Storage::delete($product->image);
+
+        }
+        $product->delete();
+
+        return redirect()->route('product.index')->with('success Dihapus');
     }
 }
