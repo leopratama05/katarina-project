@@ -50,8 +50,11 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $pr->name }}</td>
+                                            <td><img src="{{ Storage::url($pr->image) }}" width="100"></td>
                                             <td>{{ $pr->description }}</td>
+
                                             <td><img src="{{ Storage::url($pr->image) }}" widht="100"></td>
+
                                             <td>{{ $pr->barcode }}</td>
                                             <td>{{ $pr->price }}</td>
                                             <td>{{ $pr->quantity }}</td>
