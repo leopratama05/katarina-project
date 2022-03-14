@@ -1,7 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="container">
+    <p class="login-box-ms">Sign In to Start your Session</p>
+    <form action="#" method="post">
+        @csrf
+        <div class="form-group">
+            <div class="input-group">
+                <input type="email" name="email" class="form-control" @error('email') is-invalid @enderror
+                placeholder="Email" required autocomplete="email" @enderror>
+        </div>
+    </div>
+</form>
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -69,5 +79,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
