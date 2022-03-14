@@ -19,12 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('product', \App\Http\Controllers\ProductController::class)->middleware('auth','level');
+Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy')->middleware('auth','level');
+
+
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //membuat route test
 Route::get('/test', function () {
     return view('layouts.master');
 });
-
-Route::resource('product', \App\Http\Controllers\ProductController::class);
-Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
