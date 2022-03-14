@@ -19,8 +19,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('product', \App\Http\Controllers\ProductController::class)->middleware('auth','level');
-Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy')->middleware('auth','level');
+//ubah jadi group midlleware saja
+//untuk login admin
+Route::group(['middleware' => ['auth', 'level']], function () {
+    Route::resource('product', \App\Http\Controllers\ProductController::class)->middleware('auth', 'level');
+    Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+});
+
+Route::group(['middleware'=>['auth','manager']], function(){
+    //ini untuk manager
+});
+
+Route::group(['middleware'=>['auth','kasir']], function(){
+    //ini untuk kasir
+});
+
 
 
 
