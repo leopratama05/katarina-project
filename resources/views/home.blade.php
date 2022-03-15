@@ -45,7 +45,7 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="{{ route('orders.index') }}" class="small-box-footer">More info <i
+                    <a href="#" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
