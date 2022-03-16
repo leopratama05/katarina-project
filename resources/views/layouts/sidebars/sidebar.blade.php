@@ -36,7 +36,7 @@
                 <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{route('home')}}" class="nav-link ">
+                    <a href="{{ route('home') }}" class="nav-link ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('cart.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th-large"></i>
                         <p>Cart</p>
                     </a>
@@ -77,7 +77,7 @@
                     <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit()">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Logout</p>
-                        <form action="{{route('logout')}}" method="POST" id="logout-form">
+                        <form action="{{ route('logout') }}" method="POST" id="logout-form">
                             @csrf
                         </form>
                     </a>

@@ -1,13 +1,15 @@
 @extends('layouts.master')
 
-@section('title','POS Ujikom')
+@section('title')
+    <title>Pos Ujikom</title>
+@endsection
 
 @section('content-header')
     <section class="content-header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1>Home Page</h1>
+                    <h1>Cart</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -21,5 +23,97 @@
 @endsection
 
 @section('content')
-    <div id="cart"></div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Profil Kasir</h3>
+                        </div>
+                        <div class="card-body d-flex justify-content-between">
+
+                            <div class="d-flex flex-column">
+                                <p>Nama Kasir : {{ Auth::user()->name }}</b> </p>
+                                <p class="ref"></p>
+                                <p class="tgl">Tanggal : {{ date('Y-m-d') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Pilih Barang</h3>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" method="post">
+                                <div class="form-group">
+                                    <label for="">Pilih Produk</label>
+                                    <select name="product" id="" class="form-control select2">
+                                        <option value="">Pilih Produk</option>
+                                        @foreach ($products as $product)
+                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Qty</label>
+                                    <input type="number" name="quantity" value="1" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Tambah ke Keranjang</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Total Belanja</h3>
+                            </div>
+                            <div class="card-body bg-warning d-flex align-items-center justify-content-center">
+                                <h1 class="text-white text-bold totalnya">Rp.
+                                    0</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-secondary">
+                            <h3 class="card-title">Keranjang Barang</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-hovered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nama Barang</th>
+                                        <th>Barcode</th>
+                                        <th>Qty</th>
+                                        <th>Harga (Rp.)</th>
+                                        <th>Subtotal (Rp.)</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
 @endsection

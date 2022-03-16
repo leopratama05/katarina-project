@@ -35,7 +35,8 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('admlte') }}/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+            <img class="animation__shake" src="{{ asset('admlte') }}/img/AdminLTELogo.png" alt="AdminLTELogo"
+                height="60" width="60">
         </div>
 
         <!-- Navbar -->
@@ -98,6 +99,7 @@
     <script src="{{ asset('admlte') }}/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('admlte') }}/js/pages/dashboard.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>
