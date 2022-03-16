@@ -73,10 +73,13 @@
                         <p>Setting</p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th-large"></i>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit()">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>Logout</p>
+                        <form action="{{route('logout')}}" method="POST" id="logout-form">
+                            @csrf
+                        </form>
                     </a>
                 </li>
             </ul>
