@@ -51,7 +51,11 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $pr->name }}</td>
                                             <td><img src="{{ Storage::url($pr->image) }}" width="100"></td>
-                                            <td>{{ $pr->barcode }}</td>
+                                            <td>
+                                                @php
+                                                    echo DNS1D::getBarcodeSVG($pr->barcode, 'C128');
+                                                @endphp
+                                            </td>
                                             <td>{{ number_format($pr->price, 2) }}</td>
                                             <td>{{ $pr->quantity }}</td>
                                             @if ($pr->status == 1)
