@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\UserCart;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,8 @@ class UserCartController extends Controller
     public function index()
     {
         //
+        $products = Product::all();
+        return view('cart.index', compact('products'));
     }
 
     /**

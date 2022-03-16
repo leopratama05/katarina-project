@@ -51,17 +51,19 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $pr->name }}</td>
                                             <td><img src="{{ Storage::url($pr->image) }}" width="100"></td>
-                                            <td>{{ $pr->description }}</td>
-
-                                            <td><img src="{{ Storage::url($pr->image) }}" widht="100"></td>
-
                                             <td>{{ $pr->barcode }}</td>
                                             <td>{{ $pr->price }}</td>
                                             <td>{{ $pr->quantity }}</td>
+                                            @if ($pr->status == 1)
+                                                <td><a href="#" class="btn btn-success">Active</a></td>
+                                            @else
+                                                <td><a href="#" class="btn btn-danger">Inactive</a></td>
+                                            @endif
                                             <td><a href="{{ route('product.edit', $pr->id) }}"
-                                                    class="btn btn-warning">Edit</a>|
-                                                <a href="{{route('product.destroy', $pr->id)}}" class="btn btn-danger">Delete</a>
-                                                </td>
+                                                    class="btn btn-warning">Edit</a>
+                                                <a href="{{ route('product.destroy', $pr->id) }}"
+                                                    class="btn btn-danger">Delete</a>
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
