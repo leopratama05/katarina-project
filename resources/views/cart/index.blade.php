@@ -112,6 +112,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="card-footer d-flex justify-content-end">
+                            <a href="#" class="btn btn-sm btn-primary">CheckOut</a>
+                        </div>
                     </div>
                 </div>
             </div>
