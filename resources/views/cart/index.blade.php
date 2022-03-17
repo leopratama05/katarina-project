@@ -127,7 +127,15 @@
                                             <td>{{ $ct->quantity }}</td>
                                             <td>{{ $ct->product->price }}</td>
                                             <td>{{ $ct->product->price * $ct->quantity }}</td>
-                                            <td>&nbsp;</td>
+                                            <td>
+                                                <form action="#" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="cart_id" value="{{ $ct->id }}">
+                                                    <button type="submit" class="btn btn-danger"><i
+                                                            class="fas fa-trash"></i></button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

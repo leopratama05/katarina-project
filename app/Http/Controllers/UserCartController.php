@@ -18,7 +18,7 @@ class UserCartController extends Controller
     {
         //
         $cart = UserCart::all();
-        $products = Product::where('id', 'product_id')->get();
+        $products = Product::all();
         $subTotal = UserCart::all()->sum('quantity') * Product::all()->sum('price');
         return view('cart.index', compact('products', 'cart' ,'subTotal'));
     }
