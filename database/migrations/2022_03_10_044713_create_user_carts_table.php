@@ -14,6 +14,7 @@ class CreateUserCartsTable extends Migration
     public function up()
     {
         Schema::create('user_carts', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('product_id')->constrained('products');
             $table->unsignedBigInteger('quantity');
