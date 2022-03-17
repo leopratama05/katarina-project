@@ -128,7 +128,7 @@
                                             <td>{{ $ct->product->price }}</td>
                                             <td>{{ $ct->product->price * $ct->quantity }}</td>
                                             <td>
-                                                <form action="#" method="post">
+                                                <form action="{{ route('cart.destroy', $ct->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="cart_id" value="{{ $ct->id }}">
