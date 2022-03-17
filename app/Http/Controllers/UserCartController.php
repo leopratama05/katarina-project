@@ -18,8 +18,9 @@ class UserCartController extends Controller
     {
         //
         $cart = UserCart::all();
-        $products = Product::all();
-        return view('cart.index', compact('products','cart'));
+        $products = Product::where('id', 'product_id')->get();
+        $subTotal = UserCart::all()->sum('quantity') * Product::all()->sum('price');
+        return view('cart.index', compact('products', 'cart' ,'subTotal'));
     }
 
     /**
@@ -47,12 +48,20 @@ class UserCartController extends Controller
 
         ]);
 
-        $cart = new UserCart();
-        $cart->user_id  = Auth::user()->id;
-        $cart->product_id = $request->input('product_id');
-        $cart->quantity = $request->input('quantity');
-        // $cart->save();
-        // dd($cart);
+        $product_cek = UserCart::where('product_id', $request->product_id)->first();
+        if ($product_cek == null) {
+            $cart = new UserCart;
+            $cart->product_id = $request->product_id;
+            $cart->quantity = $request->quantity;
+        } else {
+            $cart = UserCart::where('product_id', $request->product_id)->first();
+            $cart->product_id = $request->product_id;
+            $cart->quantity += $request->quantity;
+        }
+        $cart->user_id = Auth::user()->id;
+        $harga = Product::where('id', $request->product_id)->first();
+
+
         if (!$cart->save()) {
             return redirect()->back()->with('error', 'Gagal menambahkan ke keranjang');
         } else {
