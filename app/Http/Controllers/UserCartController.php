@@ -20,7 +20,7 @@ class UserCartController extends Controller
         $cart = UserCart::all();
         $products = Product::all();
         $subTotal = UserCart::all()->sum('quantity') * Product::all()->sum('price');
-        return view('cart.index', compact('products', 'cart' ,'subTotal'));
+        return view('cart.index', compact('products', 'cart', 'subTotal'));
     }
 
     /**
@@ -59,7 +59,10 @@ class UserCartController extends Controller
             $cart->quantity += $request->quantity;
         }
         $cart->user_id = Auth::user()->id;
-        $harga = Product::where('id', $request->product_id)->first();
+        //update stock pada table product
+        $product_stock = Product::where('id', $request->product_id)->first();
+        $product_stock->quantity -= $request->quantity;
+        $product_stock->save();
 
 
         if (!$cart->save()) {
