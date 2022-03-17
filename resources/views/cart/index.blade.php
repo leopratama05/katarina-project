@@ -93,7 +93,7 @@
                             </div>
                             <div class="card-body bg-warning d-flex align-items-center justify-content-center">
                                 <h1 class="text-white text-bold totalnya">Rp.
-                                    0</h1>
+                                    {{ $subTotal }}</h1>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                                             <td>{{ $ct->product->barcode }}</td>
                                             <td>{{ $ct->quantity }}</td>
                                             <td>{{ $ct->product->price }}</td>
-                                            <td>&nbsp;</td>
+                                            <td>{{ $ct->product->price * $ct->quantity }}</td>
                                             <td>&nbsp;</td>
                                         </tr>
                                     @endforeach
