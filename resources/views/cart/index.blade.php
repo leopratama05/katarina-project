@@ -25,7 +25,24 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (Session::has('success'))
+                <div class="alert alert-success">
+                    <ul>
+                        <li>{{ Session::get('success') }}</li>
+                    </ul>
+                </div>
+            @endif
             <div class="row">
+
                 <div class="col-4">
                     <div class="card">
                         <div class="card-header">
@@ -47,11 +64,13 @@
                             <h3 class="card-title">Pilih Barang</h3>
                         </div>
                         <div class="card-body">
-                            <form action="#" method="post">
+                            <form action="{{ route('cart.store') }}" method="post">
+                                @csrf
+                                @method('POST')
                                 <div class="form-group">
                                     <label for="">Pilih Produk</label>
-                                    <select name="product" id="" class="form-control select2">
-                                        <option value="">Pilih Produk</option>
+                                    <select name="product_id" class="form-control">
+                                        <option value="0">Pilih Produk</option>
                                         @foreach ($products as $product)
                                             <option value="{{ $product->id }}">{{ $product->name }}</option>
                                         @endforeach
@@ -100,15 +119,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    @foreach ($cart as $ct)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $ct->product->name }}</td>
+                                            <td>{{ $ct->product->barcode }}</td>
+                                            <td>{{ $ct->quantity }}</td>
+                                            <td>{{ $ct->product->price }}</td>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

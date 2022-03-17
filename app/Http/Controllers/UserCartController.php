@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\UserCart;
+use Auth;
 use Illuminate\Http\Request;
 
 class UserCartController extends Controller
@@ -16,8 +17,9 @@ class UserCartController extends Controller
     public function index()
     {
         //
+        $cart = UserCart::all();
         $products = Product::all();
-        return view('cart.index', compact('products'));
+        return view('cart.index', compact('products','cart'));
     }
 
     /**
@@ -39,7 +41,26 @@ class UserCartController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'product_id' => 'required',
+            'quantity' => 'required',
+
+        ]);
+
+        $cart = new UserCart();
+        $cart->user_id  = Auth::user()->id;
+        $cart->product_id = $request->input('product_id');
+        $cart->quantity = $request->input('quantity');
+        // $cart->save();
+        // dd($cart);
+        if (!$cart->save()) {
+            return redirect()->back()->with('error', 'Gagal menambahkan ke keranjang');
+        } else {
+            return redirect()->back()->with('success', 'Berhasil menambahkan ke keranjang');
+        }
+        // return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
+
 
     /**
      * Display the specified resource.
