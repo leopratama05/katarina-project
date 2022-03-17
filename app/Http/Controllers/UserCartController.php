@@ -114,8 +114,14 @@ class UserCartController extends Controller
      * @param  \App\Models\UserCart  $userCart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserCart $userCart)
+    public function destroy($id)
     {
-        //
+        $cart = UserCart::findOrFail($id);
+        //update stock jika dihapus dari keranjang
+        $product_stock = Product::where('id', $cart->product_id)->first();
+        $product_stock->quantity += $cart->quantity;
+        $product_stock->save();
+        $cart->delete();
+        return redirect()->back()->with('success', 'Product removed from cart successfully!');
     }
 }
