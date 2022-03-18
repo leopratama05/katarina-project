@@ -147,11 +147,7 @@
                             </table>
                         </div>
                         <div class="card-footer d-flex justify-content-end">
-                            @if ($jml_trx > 0)
-                                <a href="#" class="btn btn-sm btn-primary">CheckOut</a>
-                            @else
-                                <a href="#" class="btn btn-sm btn-primary disable" aria-disabled="true">CheckOut</a>
-                            @endif
+                            <a href="#" class="btn btn-sm btn-primary">CheckOut</a>
                         </div>
                     </div>
                 </div>
