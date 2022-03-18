@@ -19,8 +19,9 @@ class UserCartController extends Controller
         //
         $cart = UserCart::all();
         $products = Product::all();
+        $jml_trx = $cart->count();
         $total_belanja = UserCart::sum('subTotal');
-        return view('cart.index', compact('products', 'cart', 'total_belanja'));
+        return view('cart.index', compact('products', 'cart', 'total_belanja', 'jml_trx'));
     }
 
     /**
