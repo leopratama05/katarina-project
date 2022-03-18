@@ -88,6 +88,7 @@ class UserCartController extends Controller
     public function show(UserCart $userCart)
     {
         //
+        abort(404);
     }
 
     /**

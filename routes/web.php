@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth', 'level']], function () {
     Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
     //cart
     Route::resource('cart', \App\Http\Controllers\UserCartController::class)->middleware('auth', 'level');
-    Route::resource('order',\Appp\Http\Controllers\OrderController::class)->middleware('auth', 'level');
+    Route::resource('order',\App\Http\Controllers\OrderController::class)->middleware('auth', 'level');
 });
 
 Route::group(['middleware' => ['auth', 'manager']], function () {
