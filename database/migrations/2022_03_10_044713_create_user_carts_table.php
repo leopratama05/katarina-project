@@ -18,6 +18,7 @@ class CreateUserCartsTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('product_id')->constrained('products');
             $table->unsignedBigInteger('quantity');
+            $table->integer('subTotal')->unsigned()->nullable();
 
             $table->timestamps();
         });
