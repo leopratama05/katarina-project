@@ -25,6 +25,11 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
+            @if ($msg = Session::get('gagal'))
+                <div class="alert alert-danger">
+                    <p>{{ $msg }}</p>
+                </div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -93,7 +98,7 @@
                             </div>
                             <div class="card-body bg-warning d-flex align-items-center justify-content-center">
                                 <h1 class="text-white text-bold totalnya">Rp.
-                                    {{ $subTotal }}</h1>
+                                    {{ number_format($total_belanja, 2, ',', '.') }}</h1>
                             </div>
                         </div>
                     </div>
@@ -126,7 +131,7 @@
                                             <td>{{ $ct->product->barcode }}</td>
                                             <td>{{ $ct->quantity }}</td>
                                             <td>{{ $ct->product->price }}</td>
-                                            <td>{{ $ct->product->price * $ct->quantity }}</td>
+                                            <td>{{ $ct->subTotal }}</td>
                                             <td>
                                                 <form action="{{ route('cart.destroy', $ct->id) }}" method="post">
                                                     @csrf
@@ -142,7 +147,11 @@
                             </table>
                         </div>
                         <div class="card-footer d-flex justify-content-end">
-                            <a href="#" class="btn btn-sm btn-primary">CheckOut</a>
+                            @if ($jml_trx > 0)
+                                <a href="#" class="btn btn-sm btn-primary">CheckOut</a>
+                            @else
+                                <a href="#" class="btn btn-sm btn-primary disable" aria-disabled="true">CheckOut</a>
+                            @endif
                         </div>
                     </div>
                 </div>

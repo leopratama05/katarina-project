@@ -19,8 +19,9 @@ class UserCartController extends Controller
         //
         $cart = UserCart::all();
         $products = Product::all();
-        $subTotal = UserCart::all()->sum('quantity') * Product::all()->sum('price');
-        return view('cart.index', compact('products', 'cart', 'subTotal'));
+        $jml_trx = $cart->count();
+        $total_belanja = UserCart::sum('subTotal');
+        return view('cart.index', compact('products', 'cart', 'total_belanja', 'jml_trx'));
     }
 
     /**
@@ -48,17 +49,18 @@ class UserCartController extends Controller
 
         ]);
 
-        $product_cek = UserCart::where('product_id', $request->product_id)->first();
-        if ($product_cek == null) {
-            $cart = new UserCart;
-            $cart->product_id = $request->product_id;
-            $cart->quantity = $request->quantity;
+        // $product_cek = UserCart::where('product_id', $request->product_id)->first();
+        $product = Product::where('id', $request->product_id)->first();
+        if ($request->input('quantity') > $product->quantity) {
+            //apa bila stok di product tidak cukup
+            return redirect()->back()->with('gagal','Stock Product anda tidak cukup');
         } else {
-            $cart = UserCart::where('product_id', $request->product_id)->first();
+        $cart = UserCart::where('product_id', $request->product_id)->first();
             $cart->product_id = $request->product_id;
             $cart->quantity += $request->quantity;
         }
         $cart->user_id = Auth::user()->id;
+        $cart->subTotal = $cart->quantity * $product->price;
         //update stock pada table product
         $product_stock = Product::where('id', $request->product_id)->first();
         $product_stock->quantity -= $request->quantity;
