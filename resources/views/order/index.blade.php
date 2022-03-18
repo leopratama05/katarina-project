@@ -83,9 +83,55 @@
                             data-target="#modalPayment">
                             Pembayaran
                         </button>
+                        &nbsp;
+                        &nbsp;
+                        <form action="#" method="post">
+                            @csrf
+                            @method('POST')
+                            <input type="hidden" name="dibayar">
+                            @if ($cash = Session::get('cash'))
+                                <input type="hidden" name="dibayar" value="">
+                            @else
+                                <input type="hidden" name="dibayar" value="0">
+                            @endif
+                            <button type="submit" class="btn btn-sm btn-primary text-right">Transaksi</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="#" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="hidden" name="total_harga" value="0">
+                                <div class="form-group">
+                                    <label for="">Total Harga</label>
+                                    <input type="text" class="form-control total_hargaa" name="total_hargaa">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nominal Uang : </label>
+                                    <input type="number" class="form-control" name="nominal">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Pembayaran via Cash/Manual</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
