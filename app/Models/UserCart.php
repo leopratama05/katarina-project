@@ -19,4 +19,14 @@ class UserCart extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    /**
+     * Get all of the comments for the UserCart
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function relasiCart()
+    {
+        return $this->hasMany(Product::class, 'id', 'product_id');
+    }
 }

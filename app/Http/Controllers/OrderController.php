@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\UserCart;
 use Illuminate\Http\Request;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -12,10 +15,13 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $r)
     {
         //
-        return view('order.index');
+        $product = Product::all();
+        $subTotal = UserCart::sum('subTotal');
+        $checkout = UserCart::where('user_id', Auth::user()->id)->get();
+        return view('order.index', compact('product', 'checkout','subTotal'));
     }
 
     /**

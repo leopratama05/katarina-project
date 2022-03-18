@@ -42,25 +42,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            @foreach ($checkout as $carts)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $carts->product->name }}</td>
+                                    <td>{{ $carts->product->barcode }}</td>
+                                    <td>{{ $carts->quantity }}</td>
+                                    <td>{{ number_format($carts->product->price, 2, ',', '.') }}</td>
+                                    <td>{{ number_format($carts->subTotal, 2, ',', '.') }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="card-footer text-right">
                     <div class="form-group">
                         <label for="">SubTotal</label>
-                        <p>Rp. 0</p>
+                        <p>Rp. {{ number_format($subTotal, 2, ',', '.') }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="">(PPN 10 %)</label>
+                        <p>Rp. {{ number_format($subTotal / 10, 2, ',', '.') }}</p>
                     </div>
                     <div class="form-group">
                         <label for="">Total</label>
-                        <p>Rp. 0</p>
+                        <p>Rp. {{ number_format($subTotal + ($subTotal / 10), 2, ',', '.') }}</p>
                     </div>
                     <div class="form-group">
                         <label for="">Uang Cash</label>
@@ -101,7 +107,8 @@
             </div>
         </div>
     </section>
-    <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
