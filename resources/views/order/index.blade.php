@@ -25,6 +25,11 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
+            @if ($msg = Session::get('gagal'))
+                <div class="alert alert-danger">
+                    <p>{{ $msg }}</p>
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header bg-secondary">
                     <h3 class="card-title">CheckOut</h3>
@@ -66,7 +71,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Total</label>
-                        <p>Rp. {{ number_format($subTotal + ($subTotal / 10), 2, ',', '.') }}</p>
+                        <p>Rp. {{ number_format($subTotal + $subTotal / 10, 2, ',', '.') }}</p>
                     </div>
                     <div class="form-group">
                         <label for="">Uang Cash</label>
@@ -79,7 +84,7 @@
                     <div class="form-group">
                         <label for="">Kembali</label>
                         @if ($cash = Session::get('cash'))
-                            <p>Rp. {{ number_format($cash - ($subtotal + $subtotal / 10), 2, ',', '.') }}</p>
+                            <p>Rp. {{ number_format($cash - ($subTotal + $subTotal / 10), 2, ',', '.') }}</p>
                         @else
                             <p>Rp. 0</p>
                         @endif
@@ -91,12 +96,12 @@
                         </button>
                         &nbsp;
                         &nbsp;
-                        <form action="#" method="post">
+                        <form action="{{ route('order.store') }}" method="post">
                             @csrf
                             @method('POST')
-                            <input type="hidden" name="dibayar">
+                            <input type="hidden" name="total" value="{{ $subTotal + $subTotal / 10 }}">
                             @if ($cash = Session::get('cash'))
-                                <input type="hidden" name="dibayar" value="">
+                                <input type="hidden" name="dibayar" value="{{ $cash }}">
                             @else
                                 <input type="hidden" name="dibayar" value="0">
                             @endif
@@ -122,10 +127,13 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12">
-                                <input type="hidden" name="total_harga" value="0">
+                                <input type="hidden" name="total" value="{{ $subTotal + $subTotal / 10 }}">
+
                                 <div class="form-group">
                                     <label for="">Total Harga</label>
-                                    <input type="text" class="form-control total_hargaa" name="total_hargaa">
+                                    <input type="text"
+                                        value="{{ number_format($subTotal + $subTotal / 10, 2, ',', '.') }}"
+                                        class="form-control " name="total_hargaa" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Nominal Uang : </label>

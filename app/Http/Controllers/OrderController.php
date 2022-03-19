@@ -21,7 +21,7 @@ class OrderController extends Controller
         $product = Product::all();
         $subTotal = UserCart::sum('subTotal');
         $checkout = UserCart::where('user_id', Auth::user()->id)->get();
-        return view('order.index', compact('product', 'checkout','subTotal'));
+        return view('order.index', compact('product', 'checkout', 'subTotal'));
     }
 
     /**
@@ -43,6 +43,14 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
+        $cash = $request->input('nominal');
+        $total = $request->input('total');
+
+        if ($cash < $total) {
+            return redirect()->route('order.index')->with('gagal', 'Uang yang anda masukkan kurang');
+        } else {
+            return redirect()->route('order.index')->with('cash', $cash);
+        }
     }
 
     /**
