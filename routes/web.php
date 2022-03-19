@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::group(['middleware' => ['auth', Level::class]], function () {
+Route::group(['middleware' => ['auth', 'level']], function () {
     Route::resource('product', \App\Http\Controllers\ProductController::class);
     Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
 
@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth', Level::class]], function () {
     Route::resource('order', \App\Http\Controllers\OrderController::class);
 });
 
-Route::group(['middleware' => ['auth', LevelManager::class]], function () {
+Route::group(['middleware' => ['auth', 'levelmanager']], function () {
     Route::resource('product', \App\Http\Controllers\ProductController::class);
     Route::get('product/destroy/{id}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
 
