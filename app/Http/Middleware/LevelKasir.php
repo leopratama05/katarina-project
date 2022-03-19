@@ -16,9 +16,9 @@ class LevelKasir
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->level == 'kasir') {
-            return $next($request);
+        if (\Auth::user()->level != 'kasir'){
+            return abort(404);
         }
-        return redirect('/');
+        return $next($request);
     }
 }
