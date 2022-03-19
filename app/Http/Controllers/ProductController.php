@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +19,7 @@ class ProductController extends Controller
         //passing to view product
         $title = 'Product';
         $product = Product::all();
-        return view('product.index', compact('title','product'));
-
+        return view('product.index', compact('title', 'product'));
     }
 
     /**
@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //validasi
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'image' => 'nullable|image',
@@ -59,13 +59,13 @@ class ProductController extends Controller
         }
         //insert data
         $product = Product::create([
-            'name'=>$request->input('name'),
-            'description'=>$request->input('description'),
-            'image'=>$image_path,
-            'barcode'=>$request->input('barcode'),
-            'price'=>$request->input('price'),
-            'quantity'=>$request->input('quantity'),
-            'status'=>$request->input('status'),
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'image' => $image_path,
+            'barcode' => $request->input('barcode'),
+            'price' => $request->input('price'),
+            'quantity' => $request->input('quantity'),
+            'status' => $request->input('status'),
         ]);
         //redirect
         if (!$product) {
@@ -108,7 +108,7 @@ class ProductController extends Controller
     {
         //
         //validasi
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'image' => 'nullable|image',
@@ -126,7 +126,7 @@ class ProductController extends Controller
         $product->quantity = $request->input('quantity');
         $product->status = $request->input('status');
         //cek apakah ada file gambar yang diupload
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             //delete old image
             Storage::delete($product->image);
         }
@@ -135,7 +135,7 @@ class ProductController extends Controller
         //save to database imagenya
         $product->image = $image_path;
         //save
-        if(!$product->save()){
+        if (!$product->save()) {
             return redirect()->back()->with(['error' => 'error page update']);
         }
         return redirect()->route('product.index')->with('success', 'update data');
@@ -152,9 +152,8 @@ class ProductController extends Controller
         //
         $product = Product::find($id);
         //delete image
-        if($product->image){
+        if ($product->image) {
             Storage::delete($product->image);
-
         }
         $product->delete();
 
