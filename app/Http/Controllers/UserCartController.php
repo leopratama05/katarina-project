@@ -52,8 +52,10 @@ class UserCartController extends Controller
         // $product_cek = UserCart::where('product_id', $request->product_id)->first();
         $product = Product::where('id', $request->product_id)->first();
         if ($request->input('quantity') > $product->quantity) {
+            // $cart = UserCart::where('product_id', $request->product_id)->first();
+            // $cart->quantity = $product->quantity;
+            // $cart->product_id = $request->input('product_id');
             //apa bila stok di product tidak cukup
-
             return redirect()->back()->with('gagal', 'Stock Product anda tidak cukup');
         } else {
             $cart = new UserCart;
