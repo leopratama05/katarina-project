@@ -34,6 +34,7 @@ class DoTransactionController extends Controller
             $trxDetail->user_id = $user_id;
             $trxDetail->save();
         }
+        activity()->log('Menambahkan Transaksi Baru');
         UserCart::where('user_id', $user_id)->delete();
         return redirect()->route('invoice.index');
     }
