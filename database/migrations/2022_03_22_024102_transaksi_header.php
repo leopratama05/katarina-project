@@ -17,6 +17,7 @@ class TransaksiHeader extends Migration
             $table->bigIncrements('id');
             $table->string('user_id');
             $table->string('tipe_pembayaran');
+            $table->string('dibayar');
             //total semua harga
             $table->float('jumlah');
             $table->string('status');
