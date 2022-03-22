@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\ActivityLog;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = User::select()->count();
+        $activity_log = ActivityLog::with('user')->latest()->limit(10)->orderBy('id','DESC')->get();
+
+        return view('home', compact('user', 'activity_log'));
     }
 }

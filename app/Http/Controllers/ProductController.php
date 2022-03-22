@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -17,6 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         //passing to view product
+
         $title = 'Product';
         $product = Product::all();
         return view('product.index', compact('title', 'product'));
@@ -67,6 +70,7 @@ class ProductController extends Controller
             'quantity' => $request->input('quantity'),
             'status' => $request->input('status'),
         ]);
+        activity()->log('Menambahkan Produk');
         //redirect
         if (!$product) {
             return redirect()->back()->with(['error' => 'error page create']);
