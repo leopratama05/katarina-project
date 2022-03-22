@@ -129,7 +129,7 @@
                     <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
                         Payment
                     </button> --}}
-                        <button type="button" class="btn btn-primary btn-generate float-right" style="margin-right: 5px;">
+                        <button type="button" onclick="window.print();" class="btn btn-primary btn-generate float-right" style="margin-right: 5px;">
                             <i class="fas fa-download"></i> Generate PDF
                         </button>
                         <a href="{{ route('home') }}" class="btn btn-secondary">Back to Home</a>
