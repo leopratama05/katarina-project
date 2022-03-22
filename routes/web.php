@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth', 'level']], function () {
     Route::resource('order', \App\Http\Controllers\OrderController::class);
 
     Route::resource('do_transaction', \App\Http\Controllers\DoTransactionController::class);
+    Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
 });
 
 

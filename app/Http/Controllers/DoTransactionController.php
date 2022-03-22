@@ -18,6 +18,7 @@ class DoTransactionController extends Controller
         $transaksi->user_id = $user_id;
         $transaksi->jumlah = $request->input('total');
         $transaksi->tipe_pembayaran = "tunai";
+        $transaksi->dibayar = $request->input('dibayar');
         $transaksi->status = "proses";
         $transaksi->save();
 
