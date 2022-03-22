@@ -17,10 +17,10 @@ class InvoiceController extends Controller
     public function index()
     {
         //
-        $userid = TransaksiHeader::orderBy('user_id', 'desc')->get()[0]->user_id;
-        $trxheader = TransaksiHeader::where('user_id', $userid)->get();
-        $trxdetail = TransaksiDetail::where('user_id', $userid)->get();
-        $subtotal = TransaksiDetail::where('user_id', $userid)->sum('subTotal');
+        $userid = TransaksiHeader::orderBy('id', 'desc')->get()[0]->id;
+        $trxheader = TransaksiHeader::where('id', $userid)->get();
+        $trxdetail = TransaksiDetail::where('transaksi_id', $userid)->get();
+        $subtotal = TransaksiDetail::where('transaksi_id', $userid)->sum('subTotal');
         return view('invoice.index', compact('trxheader', 'trxdetail','userid','subtotal'));
     }
 
