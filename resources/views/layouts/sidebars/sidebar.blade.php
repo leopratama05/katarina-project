@@ -123,6 +123,12 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item has-treeview">
+                        <a href="{{ route('cart.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-th-large"></i>
+                            <p>Cart</p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit()">
                             <i class="nav-icon fas fa-sign-out-alt"></i>

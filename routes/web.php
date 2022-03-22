@@ -32,8 +32,15 @@ Route::group(['middleware' => ['auth', 'level']], function () {
     Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
 });
 
+Route::group(['middleware' => ['auth', 'levelkasir']], function () {
 
+    //cart
+    Route::resource('cart', \App\Http\Controllers\UserCartController::class);
+    Route::resource('order', \App\Http\Controllers\OrderController::class);
 
+    Route::resource('do_transaction', \App\Http\Controllers\DoTransactionController::class);
+    Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
+});
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 //membuat route test
