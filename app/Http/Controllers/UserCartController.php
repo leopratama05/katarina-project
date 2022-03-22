@@ -56,9 +56,9 @@ class UserCartController extends Controller
             //apa bila stok di product tidak cukup
             return redirect()->back()->with('gagal', 'Stock Product anda tidak cukup');
         } else {
-            $cart = UserCart::where('product_id', $request->product_id)->first();
+            $cart = new UserCart;
             // $cart = \App\Models\UserCart::where('product_id', $request->input('product_id'))->first();
-            $cart->product_id = $request->input('product_id');
+            $cart->product_id = $request->product_id;
             $cart->quantity += $request->input('quantity');
         }
         $cart->user_id = Auth::user()->id;

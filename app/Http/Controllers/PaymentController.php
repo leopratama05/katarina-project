@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\UserCart;
 
 class PaymentController extends Controller
 {
@@ -35,7 +39,18 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //checkout
+        $uuid = $request->session()->get('user_id');
+        $checkout = UserCart::where('user_id', $uuid)->get();
+        $total = UserCart::where('user_id', $uuid)->sum('subTotal');
+        $cash = $request->input('cash');
+        $change = $cash - $total;
+        $payment = new Payment;
+        $payment->user_id = $uuid;
+        $payment->cash = $cash;
+        $payment->change = $change;
+        $payment->save();
+
     }
 
     /**
