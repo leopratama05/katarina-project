@@ -55,28 +55,24 @@ class UserCartController extends Controller
             // $cart = UserCart::where('product_id', $request->product_id)->first();
             //apa bila stok di product tidak cukup
             return redirect()->back()->with('gagal', 'Stock Product anda tidak cukup');
-        } elseif ($product_cek === null) {
-            $cart = UserCart::where('product_id', $request->product_id)->first();
-            $cart->quantity = $product->quantity;
-            $cart->product_id = $request->input('product_id');
         } else {
-            $cart = new UserCart;
+            $cart = UserCart::where('product_id', $request->product_id)->first();
             // $cart = \App\Models\UserCart::where('product_id', $request->input('product_id'))->first();
             $cart->product_id = $request->input('product_id');
             $cart->quantity += $request->input('quantity');
-            $cart->user_id = Auth::user()->id;
-            $cart->subTotal = $cart->quantity * $product->price;
-            //update stock pada table product
-            $product_stock = Product::where('id', $request->product_id)->first();
-            $product_stock->quantity -= $request->quantity;
-            $product_stock->save();
+        }
+        $cart->user_id = Auth::user()->id;
+        $cart->subTotal = $cart->quantity * $product->price;
+        //update stock pada table product
+        $product_stock = Product::where('id', $request->product_id)->first();
+        $product_stock->quantity -= $request->quantity;
+        $product_stock->save();
 
 
-            if (!$cart->save()) {
-                return redirect()->back()->with('error', 'Gagal menambahkan ke keranjang');
-            } else {
-                return redirect()->back()->with('success', 'Berhasil menambahkan ke keranjang');
-            }
+        if (!$cart->save()) {
+            return redirect()->back()->with('error', 'Gagal menambahkan ke keranjang');
+        } else {
+            return redirect()->back()->with('success', 'Berhasil menambahkan ke keranjang');
         }
 
         // return redirect()->back()->with('success', 'Product added to cart successfully!');
