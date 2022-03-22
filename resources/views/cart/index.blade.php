@@ -75,7 +75,7 @@
                                 <div class="form-group">
                                     <label for="">Pilih Produk</label>
                                     <select name="product_id" class="form-control">
-                                        <option value="0">Pilih Produk</option>
+
                                         @foreach ($products as $product)
                                             <option value="{{ $product->id }}">{{ $product->name }}</option>
                                         @endforeach

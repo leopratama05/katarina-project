@@ -27,6 +27,8 @@ Route::group(['middleware' => ['auth', 'level']], function () {
     //cart
     Route::resource('cart', \App\Http\Controllers\UserCartController::class);
     Route::resource('order', \App\Http\Controllers\OrderController::class);
+
+    Route::resource('do_transaction', \App\Http\Controllers\DoTransactionController::class);
 });
 
 

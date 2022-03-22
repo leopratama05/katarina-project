@@ -96,7 +96,7 @@
                         </button>
                         &nbsp;
                         &nbsp;
-                        <form action="{{ route('order.store') }}" method="post">
+                        <form action="{{ route('do_transaction.store') }}" method="post">
                             @csrf
                             @method('POST')
                             <input type="hidden" name="total" value="{{ $subTotal + $subTotal / 10 }}">
@@ -122,7 +122,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="#" method="post">
+                <form action="{{ route('order.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
