@@ -23,11 +23,25 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        $name = User::with(['name']);
         $user = User::select()->count();
         $activity_log = ActivityLog::with('user')->latest()->limit(10)->orderBy('id','DESC')->get();
 
-        return view('home', compact('user', 'activity_log'));
+        if ($request->get('name')) {
+            $nama = $request->name;
+            $name->whereHas(
+                'name', 
+                function($query) use ($nama){
+                    $query->where('name', 'LIKE', "%{$nama}%");
+                }
+            );
+        }
+        if ($request->get('keyword')) {
+            $name->search($request->keyword);
+        } 
+
+        return view('home', compact('user', 'activity_log', 'name'));
     }
 }

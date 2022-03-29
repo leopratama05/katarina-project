@@ -44,7 +44,7 @@
                         <b>Invoice #{{ $userid }}</b><br>
                         <br>
                         <b>Order ID:</b> {{ $trxheader[0]->userid }}<br>
-                        <b>Payment Due:</b> {{ date('Y-m-d') }}<br>
+                        {{-- <b>Payment Due:</b> {{ date('d-m-Y H:i:s') }}<br> --}}
                     </div>
                     <!-- /.col -->
                 </div>

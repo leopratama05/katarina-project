@@ -23,6 +23,9 @@
 @endsection
 
 @section('content')
+<?php
+$uang_diterima = 0;
+?>
     <section class="content">
         <div class="container-fluid">
             @if ($msg = Session::get('gagal'))
@@ -76,6 +79,10 @@
                     <div class="form-group">
                         <label for="">Uang Cash</label>
                         @if ($cash = Session::get('cash'))
+                        <?php
+                            $uang_diterima = $cash;
+                        ?>
+                            <input type="hidden" id="uang_diterima_id" value="<?= $uang_diterima ?>">
                             <p>Rp. {{ number_format($cash, 2, ',', '.') }}</p>
                         @else
                             <p>Rp. 0</p>
@@ -96,7 +103,7 @@
                         </button>
                         &nbsp;
                         &nbsp;
-                        <form action="{{ route('do_transaction.store') }}" method="post">
+                        <form action="{{ route('do_transaction.store') }}" method="post" >
                             @csrf
                             @method('POST')
                             <input type="hidden" name="total" value="{{ $subTotal + $subTotal / 10 }}">
@@ -105,7 +112,7 @@
                             @else
                                 <input type="hidden" name="dibayar" value="0">
                             @endif
-                            <button type="submit" class="btn btn-sm btn-primary text-right">Transaksi</button>
+                            <input type="submit" class="btn btn-sm btn-primary text-right" value="Transaksi" onclick="return cekPembayaran()">
                         </form>
                     </div>
                 </div>
@@ -149,4 +156,17 @@
             </div>
         </div>
     </div>
+
+     <script>
+        function cekPembayaran()
+        {
+
+            var uang_yangditerima = $("#uang_diterima_id").val();
+
+            if(uang_yangditerima === undefined){
+                alert("Transaksi belum dibayar")
+                return false;
+            }
+        }
+    </script>
 @endsection

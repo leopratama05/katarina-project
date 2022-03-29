@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    <title>Pos Ujikom</title>
+    <title>Cart</title>
 @endsection
 
 @section('content-header')
@@ -58,7 +58,8 @@
                             <div class="d-flex flex-column">
                                 <p>Nama Kasir : {{ Auth::user()->name }}</b> </p>
                                 <p class="ref"></p>
-                                <p class="tgl">Tanggal : {{ date('Y-m-d') }}</p>
+                                 <p class="tgl">Tanggal : {{ date('Y-m-d') }}</p>
+                               <!-- pake yg ini <p class="tgl">Tanggal : {{ date('Y-m-d H:i:s') }}</p> -->
                             </div>
                         </div>
                     </div>

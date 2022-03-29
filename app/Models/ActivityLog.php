@@ -19,4 +19,8 @@ class ActivityLog extends Model
     {
         return $this->belongsTo(User::class, 'causer_id');
     }
+    public function scopeSearch($query, $name)
+    {
+        return $query->where('name', 'LIKE', "%{$name}%");
+    }
 }

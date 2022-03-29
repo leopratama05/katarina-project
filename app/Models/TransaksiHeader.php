@@ -9,4 +9,9 @@ class TransaksiHeader extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function kasir()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
