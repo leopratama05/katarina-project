@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('admlte/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admlte/css/adminlte.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('admlte/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('admlte/css/adminlte.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     {{-- favicon --}}
-    <link rel="shortcut icon" href="{{ asset('template/images/favicon.ico')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ secure_asset('template/images/favicon.ico')}}" type="image/x-icon">
 
     @yield('css')
     <title>Login Page</title>
@@ -36,7 +36,7 @@
         </div>
     </div>
 </body>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ secure_asset('js/app.js') }}"></script>
 @yield('js')
 
 </html>
